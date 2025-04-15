@@ -1,0 +1,766 @@
+#:kivy 2.3.0
+
+MainBox:
+
+<MainBox>:
+    header: header
+    bodysection: bodysection
+    cols: 1
+    Header:
+        id: header
+    HoriLine:
+    Bodysection:
+        id: bodysection
+    HoriLine:
+    Footer:
+
+# -------------------
+# Header section
+# -------------------
+<Header>:
+    loginsign: loginsign
+    cols: 3
+    size_hint_y: None
+    height: "60dp"
+    padding: [20, 0, 20, 0]
+    canvas.before:
+        Color:
+            rgba: 0.88, 0.94, 0.90, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        text: "Eye-Track"
+        size_hint_x: None
+        width: "120dp"
+        color: 0, 0, 0, 1
+        font_size: '20sp'
+        bold: True
+        font_name: 'Roboto'
+    Label:
+        text: ""
+        size_hint_x: 1
+    Loginsign:
+        id: loginsign
+
+<Loginsign>:
+    size_hint: None, 1
+    width: self.minimum_width
+
+    AnchorLayout:
+        anchor_x: 'right'
+        anchor_y: 'center'
+        padding: [0, 10, 10, 10]
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: "10dp"
+            size_hint: None, None
+            size: self.minimum_size
+
+            Button:
+                id: login_btn 
+                text: "Login"
+                size_hint: None, None
+                size: "80dp", "35dp"
+                opacity: 1
+                disabled: False
+                color: 1, 1, 1, 1
+                background_color: 0, 0, 0, 0
+                on_release: app.root.ids.bodysection.ids.screen_manager.current = 'login'
+                canvas.before:
+                    Color:
+                        rgba: 0.2, 0.6, 0.8, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [11]
+
+            Button:
+                id: signup_btn
+                text: "Sign Up"
+                size_hint: None, None
+                size: "80dp", "35dp"
+                opacity: 1
+                disabled: False
+                color: 1, 1, 1, 1
+                background_color: 0, 0, 0, 0
+                on_release: app.root.ids.bodysection.ids.screen_manager.current = 'signup'
+                canvas.before:
+                    Color:
+                        rgba: 0.8, 0.2, 0.2, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [11]
+
+
+            Label:
+                id: welcome_label
+                text: ""
+                color: 0, 0, 0, 1
+                opacity: 0
+                size_hint_x: None
+                width: "100dp"
+
+            Button:
+                id: logout_btn
+                text: "Logout"
+                size_hint: None, None
+                size: "80dp", "35dp"
+                opacity: 0
+                on_release: app.logout()
+                canvas.before:
+                    Color:
+                        rgba: 0.4, 0.4, 0.4, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [11]
+
+
+
+<HoriLine>:
+    size_hint: 1, None
+    height: "1.3dp"
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+            
+
+# -------------------
+# Main body section
+# -------------------
+<Bodysection>:
+    id: bodysection
+    cols: 2
+    Sidebar:
+    WindowManger:
+        id: screen_manager
+        LoginScreen:
+            name: "login"
+        SignupScreen:
+            name: "signup"
+        Home:
+            name: "home"
+        About:
+            name: "about"
+        FlowChart:
+            name: "flowchart"
+        Setting:
+            name: "setting"
+
+
+
+<Sidebar>:
+    cols: 1
+    size_hint: 0.3, 1
+    padding: [16, 10, 10, 10]
+    spacing: "10dp"
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1  # White color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        size_hint: None, None
+        size: self.minimum_size
+        width: 110
+        Button:
+            text: "Home"
+            size_hint: None, None
+            height: "40dp"
+            width: "110dp"
+            on_release: root.parent.ids.screen_manager.current = 'home'
+            background_color: 1, 1, 1, 0
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.6, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [11]
+    
+
+    BoxLayout:
+        size_hint: None, None
+        size: self.minimum_size
+        width: 110
+        Button:
+            text: "About"
+            size_hint: None, None
+            height: "40dp"
+            width: "110dp"
+            on_release: root.parent.ids.screen_manager.current = 'about'
+            background_color: 1, 1, 1, 0
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.6, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [11]
+    BoxLayout:
+        size_hint: None, None
+        size: self.minimum_size
+        width: 110
+        Button:
+            text: "Flow-Chart"
+            size_hint: None, None
+            height: "40dp"
+            width: "110dp"
+            on_release: root.parent.ids.screen_manager.current = 'flowchart'
+            background_color: 1, 1, 1, 0
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.6, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [11]
+    BoxLayout:
+        size_hint: None, None
+        size: self.minimum_size
+        width: 110
+        Button:
+            text: "Setting"
+            size_hint: None, None
+            height: "40dp"
+            width: "110dp"
+            on_release: root.parent.ids.screen_manager.current = 'setting'
+            background_color: 1, 1, 1, 0
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.6, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [11]
+
+# -------------------
+# Screens
+# -------------------
+<Home>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 0.88, 0.94, 0.90, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: '"Advance Eye-tracking System For Real-time Visual Control  AnD  Interaction." '
+            font_name: "fonts/RubikWetPaint.ttf"
+            font_size: 35
+            color: 0, 0, 0, 1
+            size_hint: 1, None
+            height: "150dp"
+            text_size: self.width, self.height
+            halign: 'center'
+            valign: 'middle'
+        Label:
+            text: "PROJECT"
+            font_name: "fonts/RubikWetPaint.ttf"
+            font_size: 40
+            size_hint: 1, None
+            height: "50dp"
+            color: 0, 0, 0, 1
+            text_size: self.width, self.height
+            halign: 'center'
+            valign: 'middle'
+        Startbutton:
+
+<Startbutton>:
+    size_hint: 1, 1
+    padding: 220, 20
+    Button:
+        id: start_btn
+        text: root.button_text
+        size_hint: None, None
+        width: "100dp"
+        height: "50dp"
+        pos_hint: {"top": 1}
+        font_size: 30
+        on_press: root.start_button_clicked()
+        background_color: 1, 1, 1, 0
+        canvas.before:
+            Color:
+                rgba: (1, 0, 0, 1) if root.button_text == "Stop" else (0, 0.8, 0, 1)
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [11]
+
+
+<About>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.88, 0.94, 0.90, 1  # Soft background
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "[b]Eye-Controlled Mouse System[/b]"
+            font_size: '24sp'
+            markup: True
+            color: 0, 0.2, 0.3, 1
+
+        Label:
+            text: "This application allows users to control their mouse using only eye movements and blinks."
+            font_size: '16sp'
+            halign: 'center'
+            text_size: self.width * 0.9, None
+            color: 0, 0, 0, 1
+
+        Label:
+            text: "Features:\n• Cursor movement by eye tracking\n• Left click with left eye blink\n• Right click with right eye blink\n• Dual eye blink support"
+            font_size: '14sp'
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.width * 0.9, None
+            color: 0.1, 0.1, 0.1, 1
+
+        Label:
+            text: "Developed using Python, OpenCV, and MediaPipe"
+            font_size: '12sp'
+            halign: 'center'
+            color: 0.3, 0.3, 0.3, 1
+
+        Widget:
+            size_hint_y: None
+            height: 20
+
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: None
+            height: "40dp"
+            Button:
+                text: "Back to Home"
+                size_hint: None, None
+                width: "150dp"
+                height: "40dp"
+                background_color: 1,0,0,1
+                color: 1, 1, 1, 1
+                on_release:
+                    app.root.ids.bodysection.ids.screen_manager.current = 'home'
+
+
+<FlowChart>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+        canvas.before:
+            Color:
+                rgba: 0.88, 0.94, 0.90, 1  # Light green background
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "[b]System Flowchart[/b]"
+            font_size: '24sp'
+            markup: True
+            color: 0, 0.2, 0.3, 1
+
+        Label:
+            text: "This flowchart explains the step-by-step logic behind the eye-controlled mouse system."
+            font_size: '16sp'
+            halign: 'center'
+            text_size: self.width * 0.9, None
+            color: 0, 0, 0, 1
+
+        Label:
+            text:
+                "1. Start webcam feed\n" \
+                "2. Detect facial landmarks using MediaPipe\n" \
+                "3. Track eye movement for cursor control\n" \
+                "4. Detect left/right/both eye blinks\n" \
+                "5. Trigger mouse actions (click, move)\n" \
+                "6. Repeat until stopped"
+            font_size: '14sp'
+            halign: 'left'
+            valign: 'top'
+            text_size: self.width * 0.9, None
+            color: 0.1, 0.1, 0.1, 1
+
+        # Optional: Add a flowchart image if available
+        # Image:
+        #     source: 'flowchart.png'
+        #     allow_stretch: True
+        #     size_hint_y: 0.6
+
+        Widget:
+            size_hint_y: None
+            height: 20
+
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: None
+            height: "40dp"
+            Button:
+                text: "Back to Home"
+                size_hint: None, None
+                width: "150dp"
+                height: "40dp"
+                background_color: 1,0,0,1
+                color: 1, 1, 1, 1
+                on_release:
+                    app.root.ids.bodysection.ids.screen_manager.current = 'home'
+
+
+
+<Setting>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 0.88, 0.94, 0.90, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Button:
+            text: ""
+            size_hint: 1, None
+            height: "70dp"
+            background_color: (0, 0, 0, 0)
+        SettingButton:
+        Button:
+            text: ""
+            size_hint: 1, None
+            height: "70dp"
+            background_color: (0, 0, 0, 0)
+
+<SettingButton>:
+    BoxLayout:
+        orientation: "horizontal"
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 20
+            spacing: 10
+            Label:
+                text: "Cursor : "
+                color: 0, 0, 0, 1
+                font_size: '20sp'
+                bold: True
+            Label:
+                text: "Left Click : "
+                color: 0, 0, 0, 1
+                font_size: '20sp'
+                bold: True
+            Label:
+                text: "Right Click : "
+                color: 0, 0, 0, 1
+                font_size: '20sp'
+                bold: True
+            Label:
+                text: "Both Click : "
+                color: 0, 0, 0, 1
+                font_size: '20sp'
+                bold: True
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 10, 20
+            spacing: 10
+            Switch:
+                id: my_switch
+                on_active: root.print_switch_id("my_switch", self.active)
+            Switch:
+                id: my_switch1
+                on_active: root.print_switch_id("my_switch1", self.active)
+            Switch:
+                id: my_switch2
+                on_active: root.print_switch_id("my_switch2", self.active)
+            Switch:
+                id: my_switch3
+                on_active: root.print_switch_id("my_switch3", self.active)
+
+
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.88, 0.94, 0.90, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Login Page"
+            font_name: "fonts/RubikWetPaint.ttf"
+            font_size: 35
+            color: 0, 0, 0, 1
+            size_hint: 1, None
+            height: "150dp"
+            text_size: self.width, self.height
+            halign: 'center'
+            valign: 'middle'
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, None
+            height: "60dp"  # Adjust overall row height as needed
+            spacing: 10
+        
+            Label:
+                text: "User ID"
+                color: 0, 0, 0, 1
+                size_hint_x: 0.3
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+        
+            TextInput:
+                id: user_id
+                multiline: False
+                background_color: 1, 1, 1, 1
+                foreground_color: 0, 0, 0, 1
+                size_hint_x: 0.7
+                size_hint_y: None
+                height: "40dp"  # Fixed height for input box
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: "40dp"
+            spacing: 10
+
+            Label:
+                text: "Password"
+                color: 0, 0, 0, 1
+                size_hint_x: 0.3
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            TextInput:
+                id: password
+                multiline: False
+                password: True
+                background_color: 1, 1, 1, 1
+                foreground_color: 0, 0, 0, 1
+                size_hint_x: 0.7
+
+        
+
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: None
+            height: "40dp"
+            Button:
+                text: "Login"
+                size_hint: None, None
+                width: "100dp"
+                height: "40dp"
+                background_color: 0.2, 0.6, 0.8, 1
+                color: 1, 1, 1, 1
+                on_release:
+                    app.login(user_id.text, password.text)
+        
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: None
+            height: "40dp"
+            Button:
+                text: "Back to Home"
+                size_hint: None, None
+                width: "150dp"
+                height: "40dp"
+                background_color: 1,0,0,1
+                color: 1, 1, 1, 1
+                on_release:
+                    app.root.ids.bodysection.ids.screen_manager.current = 'home'
+
+        
+
+        
+               
+
+
+<SignupScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.88, 0.94, 0.90, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Sign Up Page"
+            font_name: "fonts/RubikWetPaint.ttf"
+            font_size: 35
+            color: 0, 0, 0, 1
+            size_hint: 1, None
+            height: "150dp"
+            text_size: self.width, self.height
+            halign: 'center'
+            valign: 'middle'
+
+        # Name Input
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: "60dp"
+            spacing: 10
+
+            Label:
+                text: "Name"
+                color: 0, 0, 0, 1
+                size_hint_x: 0.3
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            TextInput:
+                id: name
+                multiline: False
+                background_color: 1, 1, 1, 1
+                foreground_color: 0, 0, 0, 1
+                size_hint_x: 0.7
+                size_hint_y: None
+                height: "40dp"
+
+        # User ID Input
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: "60dp"
+            spacing: 10
+
+            Label:
+                text: "User ID"
+                color: 0, 0, 0, 1
+                size_hint_x: 0.3
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            TextInput:
+                id: user_id
+                multiline: False
+                background_color: 1, 1, 1, 1
+                foreground_color: 0, 0, 0, 1
+                size_hint_x: 0.7
+                size_hint_y: None
+                height: "40dp"
+
+        # Password Input
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: "60dp"
+            spacing: 10
+
+            Label:
+                text: "Password"
+                color: 0, 0, 0, 1
+                size_hint_x: 0.3
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+
+            TextInput:
+                id: password
+                multiline: False
+                password: True
+                background_color: 1, 1, 1, 1
+                foreground_color: 0, 0, 0, 1
+                size_hint_x: 0.7
+                size_hint_y: None
+                height: "40dp"
+
+        # Signup Button
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: None
+            height: "40dp"
+            Button:
+                text: "Sign Up"
+                size_hint: None, None
+                width: "100dp"
+                height: "40dp"
+                background_color: 0.2, 0.6, 0.8, 1
+                color: 1, 1, 1, 1
+                on_release:
+                    app.signup(name.text, user_id.text, password.text)
+
+        # Back Button
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: None
+            height: "40dp"
+            Button:
+                text: "Back to Home"
+                size_hint: None, None
+                width: "150dp"
+                height: "40dp"
+                background_color: 1, 0, 0, 1
+                color: 1, 1, 1, 1
+                on_release:
+                    app.root.ids.bodysection.ids.screen_manager.current = 'home'
+
+
+
+
+# -------------------
+# Footer section
+# -------------------
+<Footer>:
+    cols: 1
+    size_hint: 1, None
+    height: "35dp"
+    padding: (250, 0, 0, 0)
+    canvas.before:
+        Color:
+            rgba: 0.88, 0.94, 0.90, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        spacing: "10dp"
+        Image:
+            source: "Image/1.png"
+            size_hint: None, 1
+            width: "25dp"
+        Image:
+            source: "Image/2.png"
+            size_hint: None, 1
+            width: "25dp"
+        Image:
+            source: "Image/3.png"
+            size_hint: None, 1
+            width: "25dp"
+        Image:
+            source: "Image/4.png"
+            size_hint: None, 1
+            width: "25dp"
+        Image:
+            source: "Image/5.png"
+            size_hint: None, 1
+            width: "25dp"
+
+
+
+
